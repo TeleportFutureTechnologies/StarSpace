@@ -344,11 +344,16 @@ void StarSpace::evaluate() {
     // print out prediction results to file
     ofstream ofs(args_->predictionFile);
     for (int i = 0; i < N; i++) {
+      ofs << i << "\t";
+      for (auto pred : predictions[i]) {
+        ofs << pred.second << "," << pred.first << "\t";
+      }
+      /*
       ofs << "Example " << i << ":\nLHS:\n";
       printDoc(ofs, examples[i].LHSTokens);
       ofs << "RHS: \n";
       printDoc(ofs, examples[i].RHSTokens);
-      ofs << "Predictions: \n";
+      ofs << "Predictions: \n";    
       for (auto pred : predictions[i]) {
         if (pred.second == 0) {
           ofs << "(++) [" << pred.first << "]\t";
@@ -358,6 +363,7 @@ void StarSpace::evaluate() {
           printDoc(ofs, baseDocs_[pred.second - 1]);
         }
       }
+      */
       ofs << "\n";
     }
     ofs.close();
